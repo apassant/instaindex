@@ -43,9 +43,9 @@ Finally, launch the index procees
 
 ## Web UI
 
-A basic interface build on top of Algolia's instant-search is available in ./www.
+A basic interface build on top of Algolia's instant-search is available in ./ui.
 
-Edit ./www/js/app.js to set-up your own Algolia API and index values
+Edit ./ui/js/app.js to set-up your own Algolia API and index values
 
     // REPLACE WITH YOUR OWN VALUES
     var APPLICATION_ID = '8IOHDS4YN8';
