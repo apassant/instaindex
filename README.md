@@ -12,12 +12,12 @@ First, set-up virtualenv and install dependencies
 
     cd ./scripts
     virtualenv env
-		source env/bin/activate
-		pip install -r requirements.txt
-		
+    source env/bin/activate
+    pip install -r requirements.txt
+
 Then, copy ./scripts/settings.py.dist into ./scripts/settings.py and update with your own values
 
-    # Ignore pictures where the tagged concept has a probability < the threshold
+    # Ignore pictures where the tagged concept has a probability below the threshold
     THRESHOLD = 0.9
     # Number of pictures to index
     MAX_MEDIA = 1000
@@ -27,7 +27,7 @@ Then, copy ./scripts/settings.py.dist into ./scripts/settings.py and update with
     CLARIFAI_APP_SECRET = 'xxx'
     
     # Instagram API details - https://instagram.com/developer
-    # Get an individual token using instructions at https://instagram.com/developer/authentication/
+    # Get a token using instructions at https://instagram.com/developer/authentication/
     INSTAGRAM_API_KEY = 'xxx'
     INSTAGRAM_API_SECRET = 'xxx'
     INSTAGRAM_ACCESS_TOKEN = 'xxx'
