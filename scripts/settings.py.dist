@@ -1,0 +1,19 @@
+# Ignore pictures where the tagged concept has a probability < the threshold
+THRESHOLD = 0.9
+# Number of pictures to index
+MAX_MEDIA = 1000
+
+# Clarifai API details - http://www.clarifai.com/api
+CLARIFAI_APP_ID = 'xxx'
+CLARIFAI_APP_SECRET = 'xxx'
+
+# Instagram API details - https://instagram.com/developer
+# Get an individual token using instructions at https://instagram.com/developer/authentication/
+INSTAGRAM_API_KEY = 'xxx'
+INSTAGRAM_API_SECRET = 'xxx'
+INSTAGRAM_ACCESS_TOKEN = 'xxx'
+
+# Algolia API details = http://www.clarifai.com/api
+ALGOLIA_APP_ID = 'xxx'
+ALGOLIA_APP_KEY = 'xxx'
+ALGOLIA_INDEX_NAME = 'xxx'
