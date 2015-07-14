@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+  <title>Instant Search Demo</title>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="row">
+        <!-- Logo -->
+        <div class="col-md-3 col-md-offset-1 col-xs-12">
+					<h1>InstaIndex</h1>
+        </div>
+        <!-- Search bar -->
+        <div class="col-md-7 col-xs-12">
+          <div id="search_input" class="input-group input-lg m-t">
+            <input type="text" name="q" id="q" autocomplete="off" spellcheck="false" autocorrect="false" class="form-control input-lg string" placeholder="Search by visual..."/>
+            <span class="input-group-addon"><i id="input-search" class="glyphicon glyphicon-search"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- /Header -->
+
+  <!-- Main -->
+  <div class="container">
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-md-3 col-md-offset-1 col-xs-12 hidden-sm hidden-xs">
+        <div class="main_caption">
+          <p class="main-caption_text">
+						Visually index your Instagram pictures, and find them in real-time!
+					</p>
+          <p class="main-caption_text">
+						Powered by <a href="https://instagram.com/developer/" target="_blank">Instagram</a>, <a href="http://www.clarifai.com/" target="_blank">Clarifai</a> and <a href="https://www.algolia.com/" target="_blank">Algolia</a>.
+					</p>
+					<p class="main-caption_text">
+						<a href="">Read more</a> and <a>get the source</a>.
+					</p>
+        </div>
+        <!-- Facets -->
+        <div id="facets" class="hidden-sm hidden-xs"></div>
+      </div>
+      <!-- /Left Column -->
+      <!-- Right Column -->
+      <div class="col-md-7 col-xs-12">
+        <!-- Stats + sort order menu -->
+        <div class="page-header">
+          <span id="stats"></span>
+          <div style="clear:both;"></div>
+        </div>
+        <!-- /Stats + sort order menu -->
+        <!-- Hits -->
+        <div id="hits"></div>
+        <!-- /Hits -->
+        <!-- Pagination -->
+        <div id="pagination"></div>
+        <!-- /Pagination -->
+        <!-- /Right Column -->
+      </div>
+    </div>
+  </div>
+  <!-- /Main -->
+
+  <!-- Footer -->
+  <footer class="container text-muted text-center well">
+		boo
+	</footer>
+  <!-- /Footer -->
+
+  <!-- Facet template -->
+  <script type="text/template" id="facet-template">
+    <div class="facet">
+      <!-- facet title -->
+      <div class="page-header">
+        <h5>{{ title }}</h5>
+      </div>
+      <ul class="list-unstyled">
+        {{#values}}
+        <li class="{{#refined}}refined{{/refined}}">
+          {{#disjunctive}}
+          <input id="{{ id }}" class="checkbox-hidden" data-facet="{{ facet }}" data-value="{{ value }}" type="checkbox" {{#refined}}checked="checked"{{/refined}}>
+          {{/disjunctive}}
+          <label class="facet_link toggleRefine {{#disjunctive}}checkbox-label{{/disjunctive}}" for="{{ id }}" data-facet="{{ facet }}" data-value="{{ value }}">{{ label }}</label>
+          <small class="facet_count text-muted pull-right">{{ count }}</small>
+        </li>
+        {{/values}}
+        <!-- other values will only be displayed if the use click on the "show more" link  -->
+        {{#has_other_values}}
+        <!-- "show more" link -->
+        <li class="show-more"><a href="#"><i class="glyphicon glyphicon-chevron-down" /> more</a></li>
+        <!-- other values -->
+        {{#other_values}}
+        <li class="{{#refined}}refined{{/refined}} additional-facets show-more">
+          {{#disjunctive}}
+          <input id="{{ id }}" class="checkbox-hidden" data-facet="{{ facet }}" data-value="{{ value }}" type="checkbox" {{#refined}}checked="checked"{{/refined}}>
+          {{/disjunctive}}
+          <label class="facet_link toggleRefine {{#disjunctive}}checkbox-label{{/disjunctive}}" data-facet="{{ facet }}" data-value="{{ value }}">{{ label }}</label>
+          <small class="text-muted pull-right">{{ count }}</small>
+        </li>
+        {{/other_values}}
+        <!-- "show less" link -->
+        <li class="show-less"><a href="#"><i class="glyphicon glyphicon-chevron-up" /> less</a></li>
+        {{/has_other_values}}
+      </ul>
+    </div>
+  </script>
+
+  <!-- Hit template -->
+  <script type="text/template" id="hit-template">
+    <div class="hit media">
+      <a class="pull-left" href="{{ url }}">
+        <img class="media-object" src="{{ thumbnail }}" alt="{{ title }}">
+      </a>
+      <div class="media-body">
+        <h4>{{ title }}</h4>
+				<p>{{ created }}</p>
+        <ul class="hit_tags list-inline">
+					{{#_highlightResult.tags}}<li>{{{ value }}}</li>{{/_highlightResult.tags}}
+        </ul>
+      </div>
+    </div>
+  </script>
+
+  <!-- Pagination template -->
+  <script type="text/template" id="pagination-template">
+    <div class="text-center">
+      <ul class="pagination">
+        <li {{^prev_page}}class="disabled"{{/prev_page}}><a href="#" {{#prev_page}} class="gotoPage" data-page="{{ prev_page }}" {{/prev_page}}>&#60;</a></li>
+        {{#pages}}
+        <li class="{{#current}}active{{/current}}{{#disabled}}disabled{{/disabled}}"><a href="#" {{^disabled}} class="gotoPage" data-page="{{ number }}" {{/disabled}}>{{ number }}</a></li>
+        {{/pages}}
+        <li {{^next_page}}class="disabled"{{/next_page}}><a href="#" {{#next_page}} class="gotoPage" data-page="{{ next_page }}" {{/next_page}}>&#62;</a></li>
+      </ul>
+    </div>
+  </script>
+
+  <!-- Stats template -->
+  <script type="text/template" id="stats-template">
+    <h5>{{ nbHits }} RESULT{{#nbHits_plural}}S{{/nbHits_plural}} <span class="text-muted hidden-sm hidden-xs">Found in {{ processingTimeMS }}ms</span></h5>
+  </script>
+
+  <!-- Dependencies -->
+  <script src="//cdn.jsdelivr.net/jquery/2.1.4/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+  <script src="//cdn.jsdelivr.net/algoliasearch.helper/2/algoliasearch.helper.min.js"></script>
+  <script src="//cdn.jsdelivr.net/hogan.js/3.0.2/hogan.min.common.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>
