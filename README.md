@@ -4,6 +4,12 @@ Visually index your Instagram pictures, and find them in real-time!
 
 InstaIndex is a simple pipeline combining Clarifai's image regognition / deep learning API and Algolia's search-as-a-service API to let you visually index your Instagram pictures, and find them in real-time!
 
+## Pre-requisite
+
+- Create an Clarifai application at http://www.clarifai.com/api
+- Create an Instagram application at https://instagram.com/developer and generate an auth token
+- Create an Algolia application and index at http://www.clarifai.com/api
+
 ## Tag and index data
 
 The script to tag and index your Instagram pictures are located in ./scripts.
@@ -40,6 +46,12 @@ Then, copy ./scripts/settings.py.dist into ./scripts/settings.py and update with
 Finally, launch the index procees
 
     python ./index.py
+
+## Setup Algolia index
+
+To rank search results by tag > title, go to the "Raking" page of your Algolia index settings and add "tags" in "Basic settings" / "Attributes to index" at https://www.algolia.com/explorer#?index=IndexName&tab=ranking
+
+If you want to use facets in the following UI, go to the "Display" page of your Algolia index settings and add "tags" in "Faceting" / "Attributes for faceting" at https://www.algolia.com/explorer#?index=IndexName&tab=display
 
 ## Web UI
 
