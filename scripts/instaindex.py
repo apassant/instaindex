@@ -62,6 +62,14 @@ class InstaIndex(object):
                 'thumbnail' : medium.get_thumbnail_url(),
                 'title' : medium.caption and medium.caption.text or '',
                 'created' : datetime.strftime(medium.created_time, '%c'),
+                'likes' : medium.like_count,
+                '_geoloc' : hasattr(medium, 'location') and {
+                    'lat'  : medium.location.point.latitude,
+                    'lng' : medium.location.point.longitude
+                } or {
+                    'lat'  : '',
+                    'lng' : ''
+                }
             }] for medium in recent_media)
             self._tag_and_index(media)
             if next_:
