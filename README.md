@@ -49,7 +49,7 @@ Finally, launch the index procees
 
 ## Setup Algolia index
 
-To rank search results by tag > title, go to the "Raking" page of your Algolia index settings and add "tags" in "Basic settings" / "Attributes to index" at https://www.algolia.com/explorer#?index=IndexName&tab=ranking
+To rank search results by tag > title, go to the "Raking" page of your Algolia index settings and add "tags" in "Basic settings" / "Custom ranking" at https://www.algolia.com/explorer#?index=IndexName&tab=ranking
 
 If you want to use facets in the following UI, go to the "Display" page of your Algolia index settings and add "tags" in "Faceting" / "Attributes for faceting" at https://www.algolia.com/explorer#?index=IndexName&tab=display
 
