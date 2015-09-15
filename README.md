@@ -8,7 +8,7 @@ InstaIndex is a simple pipeline combining Clarifai's image regognition / deep le
 
 - Create an Clarifai application at http://www.clarifai.com/api
 - Create an Instagram application at https://instagram.com/developer and generate an auth token
-- Create an Algolia application and index at http://www.clarifai.com/api
+- Create an Algolia application and index at http://www.algolia.com/doc
 
 ## Tag and index data
 
@@ -38,7 +38,7 @@ Then, copy ./scripts/settings.py.dist into ./scripts/settings.py and update with
     INSTAGRAM_API_SECRET = 'xxx'
     INSTAGRAM_ACCESS_TOKEN = 'xxx'
     
-    # Algolia API details = http://www.clarifai.com/api
+    # Algolia API details = http://www.algolia.com/doc
     ALGOLIA_APP_ID = 'xxx'
     ALGOLIA_APP_KEY = 'xxx'
     ALGOLIA_INDEX_NAME = 'xxx'
