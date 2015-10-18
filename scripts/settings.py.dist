@@ -13,7 +13,7 @@ INSTAGRAM_API_KEY = 'xxx'
 INSTAGRAM_API_SECRET = 'xxx'
 INSTAGRAM_ACCESS_TOKEN = 'xxx'
 
-# Algolia API details = http://www.clarifai.com/api
+# Algolia API details = https://www.algolia.com/doc
 ALGOLIA_APP_ID = 'xxx'
 ALGOLIA_APP_KEY = 'xxx'
 ALGOLIA_INDEX_NAME = 'xxx'
