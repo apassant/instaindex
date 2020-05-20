@@ -1,6 +1,6 @@
 algoliasearch==1.5.8
 clarifai==0.2
-httplib2==0.9.1
+httplib2==0.18.0
 python-instagram==1.3.1
 simplejson==3.7.3
 six==1.9.0
